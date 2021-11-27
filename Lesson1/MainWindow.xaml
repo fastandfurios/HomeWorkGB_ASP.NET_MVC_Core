@@ -7,6 +7,20 @@
         mc:Ignorable="d"
         Title="Fibbonaci" Height="500" Width="800" Background="LightSlateGray">
     <Grid>
+        <Grid.Resources>
+            <ResourceDictionary>
+                <Style TargetType="Button">
+                    <Setter Property="Height" Value="80"/>
+                    <Setter Property="Width" Value="150"/>
+                    <Setter Property="FontSize" Value="35"/>
+                    <Setter Property="HorizontalAlignment" Value="Left"/>
+                    <Setter Property="BorderBrush" Value="Azure"/>
+                    <Setter Property="BorderThickness" Value="5"/>
+                    <Setter Property="FontFamily" Value="Curlz MT"/>
+                    <Setter Property="VerticalAlignment" Value="Top"/>
+                </Style>
+            </ResourceDictionary>
+        </Grid.Resources>
         <TextBox Name="Numbers" 
                  HorizontalAlignment="Left" 
                  Margin="10,10,0,0"
@@ -17,18 +31,7 @@
                  BorderThickness="0,0,0,0"
                  Height="280"
                  VerticalScrollBarVisibility="Auto"/>
-        <Button Content="Start" 
-                HorizontalAlignment="Left" 
-                Margin="100,334,0,0" 
-                VerticalAlignment="Top" 
-                Height="66" 
-                Width="150" 
-                FontSize="35" 
-                Click="Button_Click" 
-                Background="DarkGreen" 
-                BorderBrush="Azure" 
-                BorderThickness="2"
-                FontFamily="Curlz MT"/>
+        <Button Content="Start" Margin="45,334,0,0" Click="Button_Click_Start" Background="DarkGreen"/>
         <Slider Name="Slider"
                 HorizontalAlignment="Left"
                 Margin="493,376,0,0"
@@ -48,5 +51,6 @@
                  RenderTransformOrigin="0.5,0.5"
                  FontSize="15"
                  TextAlignment="Center"/>
+        <Button Content="Stop" Margin="250,334,0,0" Background="DarkRed" Click="Button_Click_Stop"/>
     </Grid>
 </Window>
