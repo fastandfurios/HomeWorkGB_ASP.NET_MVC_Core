@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Windows;
 using System.Windows.Threading;
@@ -12,7 +9,7 @@ namespace Lesson1
     public partial class MainWindow
     {
         private readonly IList<long> _numbers = new List<long>();
-        private const int _kof = 1000;
+        private const int _factor = 1000;
         private int _milliseconds;
         private Thread? _thread;
 
@@ -24,17 +21,17 @@ namespace Lesson1
         private void Button_Click_Start(object sender, RoutedEventArgs e)
         {
             Numbers.Text = "";
-            _thread = new Thread(() => EnumerableFibbonaci());
+            _thread = new Thread(() => EnumerableFibonacci());
             _thread.Start();
         }
 
         private void Button_Click_Stop(object sender, RoutedEventArgs e) => _thread?.Interrupt();
 
-        private void EnumerableFibbonaci()
+        private void EnumerableFibonacci()
         {
             try
             {
-                foreach (var item in GetNumberFibbonaci())
+                foreach (var item in GetNumberFibonacci())
                 {
                     Application.Current.Dispatcher.Invoke(DispatcherPriority.Background, () =>
                     {
@@ -49,7 +46,7 @@ namespace Lesson1
             }
         }
 
-        private IEnumerable<string> GetNumberFibbonaci()
+        private IEnumerable<string> GetNumberFibonacci()
         {
             for (int i = 0; ; i++)
             {
@@ -71,8 +68,8 @@ namespace Lesson1
               {
                   Application.Current.Dispatcher.Invoke(DispatcherPriority.Background, () =>
                   {
-                      _milliseconds = (int)(Slider.Value * _kof);
-                      Interval.Text = $"{Slider.Value.ToString("0.0")} с";
+                      _milliseconds = (int)(Slider.Value * _factor);
+                      Interval.Text = $"{Slider.Value:0.0} с";
                   });
               }) { Name = "Slider" }.Start();
     }

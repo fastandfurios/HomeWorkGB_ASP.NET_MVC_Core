@@ -22,15 +22,16 @@
             </ResourceDictionary>
         </Grid.Resources>
         <TextBox Name="Numbers" 
-                 HorizontalAlignment="Left" 
-                 Margin="10,10,0,0"
+                 HorizontalAlignment="Center" 
+                 Margin="0,10,0,0"
                  TextWrapping="Wrap" 
                  VerticalAlignment="Top"
                  FontSize="20"
                  Background="LightSlateGray"
-                 BorderThickness="0,0,0,0"
-                 Height="280"
-                 VerticalScrollBarVisibility="Auto"/>
+                 BorderThickness="2"
+                 Height="253"
+                 VerticalScrollBarVisibility="Auto"
+                 BorderBrush="WhiteSmoke" Width="780"/>
         <Button Content="Start" Margin="45,334,0,0" Click="Button_Click_Start" Background="DarkGreen"/>
         <Slider Name="Slider"
                 HorizontalAlignment="Left"
@@ -52,5 +53,14 @@
                  FontSize="15"
                  TextAlignment="Center"/>
         <Button Content="Stop" Margin="250,334,0,0" Background="DarkRed" Click="Button_Click_Stop"/>
+        <TextBlock HorizontalAlignment="Left"
+                   Margin="10,268,0,0"
+                   TextWrapping="Wrap"
+                   VerticalAlignment="Top"
+                   Width="486">
+            Нажмите на кнопку "Start", чтобы запустить последовательность чисел Фибоначчи
+            Нажмите на кнопку "Stop", чтобы остановить последовательность чисел Фибоначчи
+            Двигайте ползунок для изменения появления числа Фибоначчи в последовательности
+        </TextBlock>
     </Grid>
 </Window>
