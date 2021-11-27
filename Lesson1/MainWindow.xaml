@@ -5,8 +5,25 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Lesson1"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Fibbonaci" Height="450" Width="800" Background="LightSlateGray">
     <Grid>
-
+        <TextBox Name="Numbers" 
+                 HorizontalAlignment="Left" 
+                 Margin="10,10,0,0"
+                 TextWrapping="Wrap" 
+                 VerticalAlignment="Top"
+                 FontSize="20"
+                 Background="LightSlateGray" BorderThickness="0,0,0,0"/>
+        <Button Content="Start" 
+                HorizontalAlignment="Center" 
+                Margin="0,254,0,0" 
+                VerticalAlignment="Top" 
+                Height="65" 
+                Width="150" 
+                FontSize="35" 
+                Click="Button_Click" 
+                Background="IndianRed" 
+                BorderBrush="Azure" 
+                BorderThickness="2" FontFamily="Curlz MT"/>
     </Grid>
 </Window>
