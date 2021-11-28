@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading;
 using System.Windows;
@@ -18,6 +19,7 @@ namespace Lesson1
             InitializeComponent();
         }
 
+        //Решение задачи 1
         private void Button_Click_Start(object sender, RoutedEventArgs e)
         {
             Numbers.Text = "";
@@ -25,44 +27,68 @@ namespace Lesson1
             _thread.Start();
         }
 
+        //Решение задачи 3
         private void Button_Click_Stop(object sender, RoutedEventArgs e) => _thread?.Interrupt();
 
         private void EnumerableFibonacci()
         {
             try
             {
-                foreach (var item in GetNumberFibonacci())
+                foreach (var number in GetNumberFibonacci())
                 {
-                    Application.Current.Dispatcher.Invoke(DispatcherPriority.Background, () =>
-                    {
-                        Thread.Sleep(_milliseconds);
-                        Numbers.Text += $" {item}";
-                    });
+                    if (number >= 0)
+                        Application.Current.Dispatcher.Invoke(DispatcherPriority.Background, () =>
+                        {   
+                            Thread.Sleep(_milliseconds);
+                            Numbers.Text += $" {number}";
+                        });
                 }
             }
             catch (ThreadInterruptedException ex)
             {
                 Debug.WriteLine(ex.Message);
+                Application.Current.Dispatcher.Invoke(DispatcherPriority.Background, () => Numbers.Text += " Sequence Stop!");
             }
         }
 
-        private IEnumerable<string> GetNumberFibonacci()
+        private IEnumerable<long> GetNumberFibonacci()
         {
+            long number = 0;
+
             for (int i = 0; ; i++)
             {
                 if (i is 0 or 1)
                 {
                     _numbers.Add(i);
-                    yield return i.ToString();
+                    yield return i;
                 }
                 else
                 {
-                    _numbers.Add(_numbers[i - 2] + _numbers[i - 1]);
-                    yield return (_numbers[i - 2] + _numbers[i - 1]).ToString();
+                    try
+                    {
+                        checked
+                        {
+                            number = _numbers[i - 2] + _numbers[i - 1];
+                            _numbers.Add(number);
+                        }
+                    }
+                    catch (OverflowException ex)
+                    {
+                        Debug.WriteLine(ex.Message);
+                        _thread?.Interrupt();
+                    }
+                    catch (ArgumentOutOfRangeException ex)
+                    {
+                        Debug.WriteLine(ex.Message);
+                        _thread?.Interrupt();
+                    }
+                    
+                    yield return number;
                 }
             }
         }
 
+        //Решение задачи 2
         private void Slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
           =>  new Thread(() =>
               {
