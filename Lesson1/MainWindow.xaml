@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Lesson1"
         mc:Ignorable="d"
-        Title="Fibbonaci" Height="500" Width="800" Background="LightSlateGray">
+        Title="Fibonacсi" Height="500" Width="800" Background="LightSlateGray">
     <Grid>
         <Grid.Resources>
             <ResourceDictionary>
