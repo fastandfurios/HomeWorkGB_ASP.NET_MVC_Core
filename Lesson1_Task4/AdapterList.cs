@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,6 +10,10 @@ namespace Lesson1_Task4
     public class AdapterList<T> : List<T>
     {
         private readonly object _lock = new();
+
+        public AdapterList(int capacity = 0) : base(capacity)
+        {
+        }
 
         public void AddWithLock(T obj)
         {
@@ -30,7 +35,15 @@ namespace Lesson1_Task4
         {
             lock(_lock)
             {
-               return Remove(item);
+                try
+                {
+                    return Remove(item);
+                }
+                catch (ArgumentOutOfRangeException ex)
+                {
+                    Debug.WriteLine(ex.Message);
+                    return false;
+                }
             }
         }
 
@@ -38,7 +51,15 @@ namespace Lesson1_Task4
         {
             lock(_lock)
             {
-                return RemoveAll(match);
+                try
+                {
+                    return RemoveAll(match);
+                }
+                catch (ArgumentOutOfRangeException ex)
+                {
+                    Debug.WriteLine(ex.Message);
+                    return 0;
+                }
             }
         }
 
@@ -46,7 +67,14 @@ namespace Lesson1_Task4
         {
             lock (_lock)
             {
-                RemoveAt(index);
+                try
+                {
+                    RemoveAt(index);
+                }
+                catch (ArgumentOutOfRangeException ex)
+                {
+                    Debug.WriteLine(ex.Message);
+                }
             }
         }
 
@@ -54,7 +82,18 @@ namespace Lesson1_Task4
         {
             lock (_lock)
             {
-                RemoveRange(index, count);
+                try
+                {
+                    RemoveRange(index, count);
+                }
+                catch (ArgumentOutOfRangeException ex)
+                {
+                    Debug.WriteLine(ex.Message);
+                }
+                catch (ArgumentException ex)
+                {
+                    Debug.WriteLine(ex.Message);
+                }
             }
         }
     }
