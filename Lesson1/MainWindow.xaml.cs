@@ -36,13 +36,17 @@ namespace Lesson1
             {
                 foreach (var number in GetNumberFibonacci())
                 {
-                    if (number >= 0)
-                        Application.Current.Dispatcher.Invoke(DispatcherPriority.Background, () =>
-                        {   
-                            Thread.Sleep(_milliseconds);
-                            Numbers.Text += $" {number}";
-                        });
+                    Application.Current.Dispatcher.Invoke(DispatcherPriority.Background, () =>
+                    {
+                        Thread.Sleep(_milliseconds);
+                        Numbers.Text += $" {number}";
+                    });
                 }
+            }
+            catch (OverflowException ex)
+            {
+                Debug.WriteLine(ex.Message);
+                Application.Current.Dispatcher.Invoke(DispatcherPriority.Background, () => Numbers.Text += $" {ex.Message}");
             }
             catch (ThreadInterruptedException ex)
             {
@@ -72,17 +76,8 @@ namespace Lesson1
                             _numbers.Add(number);
                         }
                     }
-                    catch (OverflowException ex)
-                    {
-                        Debug.WriteLine(ex.Message);
-                        _thread?.Interrupt();
-                    }
-                    catch (ArgumentOutOfRangeException ex)
-                    {
-                        Debug.WriteLine(ex.Message);
-                        _thread?.Interrupt();
-                    }
-                    
+                    finally { }
+
                     yield return number;
                 }
             }
@@ -90,13 +85,14 @@ namespace Lesson1
 
         //Решение задачи 2
         private void Slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
-          =>  new Thread(() =>
-              {
-                  Application.Current.Dispatcher.Invoke(DispatcherPriority.Background, () =>
-                  {
-                      _milliseconds = (int)(Slider.Value * _factor);
-                      Interval.Text = $"{Slider.Value:0.0} с";
-                  });
-              }) { Name = "Slider" }.Start();
+          => new Thread(() =>
+             {
+                 Application.Current.Dispatcher.Invoke(DispatcherPriority.Background, () =>
+                 {
+                     _milliseconds = (int)(Slider.Value * _factor);
+                     Interval.Text = $"{Slider.Value:0.0} с";
+                 });
+             })
+          { Name = "Slider" }.Start();
     }
 }
