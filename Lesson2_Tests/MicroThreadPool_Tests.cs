@@ -50,8 +50,8 @@ namespace Lesson2_Tests
             }
 
             Type type = typeof(ArgumentOutOfRangeException);
-            Assert.Throws(exceptionType: type, testCode: () => 
-            { 
+            Assert.Throws(exceptionType: type, testCode: () =>
+            {
                 pool.AddTaskToPool(new(CalculateSum));
                 pool.AddTaskToPool(new(CalculateSum));
                 pool.AddTaskToPool(new(CalculateSum));
@@ -64,6 +64,51 @@ namespace Lesson2_Tests
                 pool.AddTaskToPool(new(CalculateSum));
                 pool.AddTaskToPool(new(CalculateSum));
             });
+        }
+
+        [Fact]
+        public void RemoveTaskFromPool_delete_by_nonexistent_id()
+        {
+            var pool = new MicroThreadPool();
+
+            Assert.False(pool.RemoveTaskFromPool(43));
+        }
+
+        [Fact]
+        public void RemoveTaskFromPool_delete_by_existing_id()
+        {
+            var pool = new MicroThreadPool();
+            var task = new Task(CalculateSum);
+
+            async void CalculateSum()
+            {
+                int a = 100_000, b = 2_000;
+                Debug.WriteLine($"Sum {a + b}");
+                await Task.Delay(100);
+            }
+
+            pool.AddTaskToPool(task);
+
+            Assert.True(pool.RemoveTaskFromPool(task.Id));
+        }
+
+        [Fact]
+        public void RemoveTaskFromPool_delete_task_immediately_after_it_start()
+        {
+            var pool = new MicroThreadPool();
+            var task = new Task(CalculateSum);
+
+            async void CalculateSum()
+            {
+                int a = 100_000, b = 2_000;
+                Debug.WriteLine($"Sum {a + b}");
+                await Task.Delay(100);
+            }
+
+            pool.AddTaskToPool(task);
+            pool.StartTaskFromPool(task.Id);
+
+            Assert.True(pool.RemoveTaskFromPool(task.Id));
         }
 
         [Fact]
