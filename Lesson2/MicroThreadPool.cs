@@ -1,20 +1,34 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Concurrent;
+using System.Diagnostics;
 
 namespace Lesson2
 {
     public sealed class MicroThreadPool
     {
-        private int _id;
-        private readonly Queue<Task> _tasks = new();
-        
+        private int _counter;
+        private const int _conterMax = 10;
+        private readonly ConcurrentQueue<Task> _tasks = new();
 
-        /// <summary> Возращает id потока из пула </summary>
-        public int Id => _id;
-        public StringBuilder Status { get; set; }
+        /// <summary> Добавляет созданную задачу в пулл </summary>
+        /// <param name="task">задача</param>
+        /// <exception cref="ArgumentNullException">исключение возникает, если аргумент параметра равен null</exception>
+        /// <exception cref="ArgumentOutOfRangeException">исключение возникает при превышении лимита потоков в пулле</exception>
+        public void AddTaskToPool(Task task)
+        {
+            if (_counter < _conterMax)
+            {
+                if (task is null) throw new ArgumentNullException("Value cannot be null");
+                else
+                {
+                    _tasks.Enqueue(task);
+                    Debug.WriteLine($"Task successfully added! Id: {task.Id} Status: {task.Status}");
+                }
+                
+                _counter++;
+            }
+            else
+                throw new ArgumentOutOfRangeException("Thread pool limit exceeded");
+        }
 
         /// <summary> Получает информацию о всех потоках из пула </summary>
         /// <returns>возвращает строки с информацией о потоках из пула</returns>
@@ -24,17 +38,27 @@ namespace Lesson2
                 yield return $"{task.Id} {task.Status}";
         }
 
-        public Task AddTaskToPool(Action action, int idTask)
+        /// <summary> Запускает выбранный поток из пулла потоков </summary>
+        /// <param name="idTask">id потока</param>
+        public void StartTaskFromPool(int idTask)
         {
-            if(_tasks.Count > 0) return _tasks.Dequeue();
-            return new(action);
-        }
-        
-        public void ReleaseTask(Task task)
-        {
-            if (task is null) return;
-
-            _tasks.Enqueue(task);
-        }
+            try
+            {
+                _tasks.SingleOrDefault(task => task.Id == idTask)!
+                      .Start();
+            }
+            catch (ObjectDisposedException)
+            {
+                throw;
+            }
+            catch (InvalidOperationException)
+            {
+                throw;
+            }
+            catch (NullReferenceException)
+            {
+                throw;
+            }
+        } 
     }
 }
