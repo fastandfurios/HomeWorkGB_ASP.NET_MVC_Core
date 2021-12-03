@@ -18,7 +18,7 @@ namespace Lesson2_Tests
         }
 
         [Fact]
-        public void AddTaskToPool_add_nonull()
+        public void AddTaskToPool_add_not_null()
         {
             var pool = new MicroThreadPool();
             var task = new Task(CalculateSum);
@@ -93,7 +93,10 @@ namespace Lesson2_Tests
         [Fact]
         public void StartTaskPull_non_existent_in_pool_throw_exception()
         {
+            var pool = new MicroThreadPool();
 
+            Type type = typeof(NullReferenceException);
+            Assert.Throws(exceptionType: type, testCode: () => pool.StartTaskFromPool(6));
         }
     }
 }
