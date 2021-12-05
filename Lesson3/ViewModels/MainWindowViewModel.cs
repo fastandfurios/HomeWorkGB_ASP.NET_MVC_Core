@@ -4,14 +4,14 @@ namespace Lesson3.ViewModels
 {
     public class MainWindowViewModel : BaseViewModel
     {
-        private ICommand? _command;
-        private string? _text;
+        private ICustomCommand? _command;
+        private string? _text = "Hello World";
 
-        public ICommand? Command 
+        public ICustomCommand? Command 
         { 
             get
             {
-                if(_command is null) _command = new Command(obj => ChangeText());
+                if(_command is null) _command = new CustomCommand(obj => ChangeText());
                 return _command;
             }
         }

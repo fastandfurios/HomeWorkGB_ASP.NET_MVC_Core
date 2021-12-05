@@ -2,7 +2,7 @@
 
 namespace Lesson3.Models
 {
-    public interface ICommand
+    public interface ICustomCommand
     {
         bool CanExecute(object? parameter);
         void Execute(object? parameter);
