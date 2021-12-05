@@ -6,12 +6,12 @@
         xmlns:viewModel="clr-namespace:Lesson3.ViewModels"
         xmlns:diag="clr-namespace:System.Diagnostics;assembly=WindowsBase"
         mc:Ignorable="d"
-        Title="{Binding Text}" Height="450" Width="800">
+        Title="Lesson3" Height="450" Width="800">
     <Window.DataContext>
         <viewModel:MainWindowViewModel/>
     </Window.DataContext>
     <Grid>
-        <Button Content="Click" 
+        <Button Content="{Binding Name}" 
                 FontSize="35" 
                 HorizontalAlignment="Center" 
                 Margin="0,325,0,0" 
@@ -19,7 +19,8 @@
                 Height="56" 
                 Width="142" 
                 Command="{Binding Command, diag:PresentationTraceSources.TraceLevel=High}" 
-                Background="#FFBB2424"/>
+                Background="#FFBB2424"
+                ToolTip="{Binding Description}"/>
         <TextBlock HorizontalAlignment="Left" FontSize="35" Margin="10,10,0,0" TextWrapping="Wrap" Text="{Binding Text}" VerticalAlignment="Top"/>
     </Grid>
 </Window>
