@@ -3,13 +3,13 @@ using System.Windows.Input;
 
 namespace Lesson3.Models
 {
-    internal sealed class CustomCommand : ICustomCommand
+    internal sealed class ClickCommand : IClickCommand
     {
         private readonly Predicate<object> _canExecute;
         private readonly Action<object> _execute;
 
-        public CustomCommand(Action<object> execute) : this(execute, null!) { }
-        public CustomCommand(Action<object> execute, Predicate<object> canExecute)
+        public ClickCommand(Action<object> execute) : this(execute, null!) { }
+        public ClickCommand(Action<object> execute, Predicate<object> canExecute)
         {
             if (execute is null) throw new ArgumentNullException(nameof(execute));
             _execute = execute;
