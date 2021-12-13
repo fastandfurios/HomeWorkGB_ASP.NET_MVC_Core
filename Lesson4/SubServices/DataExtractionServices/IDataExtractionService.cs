@@ -2,6 +2,6 @@
 {
     public interface IDataExtractionService
     {
-        IEnumerable<string> GetWeather(string html);
+        Task<IEnumerable<string>> GetWeatherAsync(string html);
     }
 }
