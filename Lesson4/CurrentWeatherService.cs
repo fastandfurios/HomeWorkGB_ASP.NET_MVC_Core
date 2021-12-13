@@ -3,6 +3,7 @@ using Lesson4.SubServices.DataExtractionServices;
 
 namespace Lesson4
 {
+    //Facade
     public class CurrentWeatherService
     {
         private readonly IAccessToWeatherDataService _accessService;
@@ -14,13 +15,11 @@ namespace Lesson4
             _extractionService = extractionService;
         }
 
-        public void Run() => RunServices().ConfigureAwait(false);
-
-        private async Task RunServices()
+        public async Task<IEnumerable<string>> GetWeatherAsync()
         {
             _accessService.URL = new("https://www.gismeteo.ru/weather-cherepovets-4285/");
-            var responce = await _accessService.GetResponse().ConfigureAwait(false);
-            _extractionService.GetWeather(responce);
+            var responce = await _accessService.GetResponseAsync().ConfigureAwait(false);
+           return await _extractionService.GetWeatherAsync(responce).ConfigureAwait(false);
         }
     }
 }
