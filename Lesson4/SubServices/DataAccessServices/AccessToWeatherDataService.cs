@@ -1,5 +1,6 @@
 ﻿namespace Lesson4.SubServices.DataAccessServices
 {
+    //Adapter
     public sealed class AccessToWeatherDataService : IAccessToWeatherDataService
     {
         private static readonly HttpClient _httpClient = new();
@@ -7,7 +8,7 @@
 
         public Uri URL { get => _url!; set => _url = value; }
 
-        public async Task<string> GetResponse()
+        public async Task<string> GetResponseAsync()
         {
             try
             {

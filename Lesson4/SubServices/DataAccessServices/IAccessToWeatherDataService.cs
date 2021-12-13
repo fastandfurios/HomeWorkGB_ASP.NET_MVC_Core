@@ -3,6 +3,6 @@
     public interface IAccessToWeatherDataService
     {
         Uri URL { get; set; }
-        Task<string> GetResponse();
+        Task<string> GetResponseAsync();
     }
 }
