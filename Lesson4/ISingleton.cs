@@ -1,5 +1,6 @@
 ﻿namespace Lesson4
 {
+    //Singleton
     public interface ISingleton<T> where T : class, new()
     {
         static object _lockObject = new();
