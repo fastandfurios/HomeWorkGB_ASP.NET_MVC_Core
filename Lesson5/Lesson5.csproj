@@ -7,4 +7,19 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Remove="Text.txt" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Text.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ManagerScanerLibrary\ManagerScannerLibrary.csproj" />
+    <ProjectReference Include="..\ScannerLibrary\ScannerLibrary.csproj" />
+  </ItemGroup>
+
 </Project>

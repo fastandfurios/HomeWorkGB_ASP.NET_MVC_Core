@@ -1,2 +1,6 @@
-﻿// See https://aka.ms/new-console-template for more information
-Console.WriteLine("Hello, World!");
+﻿using ScannerLibrary;
+
+var scanner = new ScannerService();
+await scanner.ScanAsync("Text.txt");
+
+Console.ReadLine();
