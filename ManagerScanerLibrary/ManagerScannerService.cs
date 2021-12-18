@@ -1,22 +1,60 @@
 ﻿using ManagerScannerLibrary.Interfaces;
+using ScannerLibrary.Interfaces;
+using Serilog;
 
 namespace ManagerScannerLibrary
 {
-    public class ManagerScannerService : IManagerScannerService
+    public sealed class ManagerScannerService : IManagerScannerService
     {
-        public Task<bool> SaveToJson(byte[] buffer)
+        private readonly IScannerService _scanner;
+        private IFormatScan _setupScan;
+
+        public string SourceFileName { get; set; }
+        public string TargetFileName { get; set; }
+
+        public ManagerScannerService(IScannerService scanner)
         {
-            throw new NotImplementedException();
+            _scanner = scanner ?? throw new ArgumentNullException(nameof(scanner));
+
+            Log.Logger = new LoggerConfiguration()
+                .MinimumLevel.Debug()
+                .WriteTo.File("logs/scan_logs.txt", rollingInterval: RollingInterval.Day)
+                .CreateLogger();
         }
 
-        public Task<bool> SaveToTxt(byte[] buffer)
+        public async Task RunScanner()
         {
-            throw new NotImplementedException();
+            try
+            {
+                await _setupScan.ScanAndSave(_scanner, SourceFileName, TargetFileName);
+            }
+            catch (IOException ex)
+            {
+                Log.Error(ex, "{0}", ex.Message);
+                throw;
+            }
+            catch (ArgumentException ex)
+            {
+                Log.Error(ex, "{0}", ex.Message);
+                throw;
+            }
+            catch (UnauthorizedAccessException ex)
+            {
+                Log.Error(ex, "{0}", ex.Message);
+                throw;
+            }
+            catch (NotSupportedException ex)
+            {
+                Log.Error(ex, "{0}", ex.Message);
+                throw;
+            }
+            catch (ObjectDisposedException ex)
+            {
+                Log.Error(ex, "{0}", ex.Message);
+                throw;
+            }
         }
-
-        public Task<bool> SaveToXml(byte[] buffer)
-        {
-            throw new NotImplementedException();
-        }
+        
+        public void SetupScan(IFormatScan setupScan) => _setupScan = setupScan;
     }
 }
