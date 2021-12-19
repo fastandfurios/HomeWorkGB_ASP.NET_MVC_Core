@@ -5,7 +5,7 @@ var scanner = new ScannerService();
 
 var manager = new ManagerScannerService(scanner)
 {
-    SourceFileName = "",
+    SourceFileName = "Text.txt",
     TargetFileName = "Result.txt"
 };
 manager.SetupScan(new TxtFormat());
