@@ -1,25 +1,21 @@
 ﻿using ManagerScannerLibrary.Interfaces;
 using ScannerLibrary.Interfaces;
-using Serilog;
 
 namespace ManagerScannerLibrary
 {
     public sealed class ManagerScannerService : IManagerScannerService
     {
+        private readonly ILogger _logger;
         private readonly IScannerService _scanner;
         private IFormatScan _setupScan;
 
         public string SourceFileName { get; set; }
         public string TargetFileName { get; set; }
 
-        public ManagerScannerService(IScannerService scanner)
+        public ManagerScannerService(IScannerService scanner, ILogger logger)
         {
+            _logger = logger ?? throw new ArgumentNullException(nameof(logger));
             _scanner = scanner ?? throw new ArgumentNullException(nameof(scanner));
-
-            Log.Logger = new LoggerConfiguration()
-                .MinimumLevel.Debug()
-                .WriteTo.File("logs/scan_logs.txt", rollingInterval: RollingInterval.Day)
-                .CreateLogger();
         }
 
         public async Task RunScanner()
@@ -30,27 +26,27 @@ namespace ManagerScannerLibrary
             }
             catch (IOException ex)
             {
-                Log.Error(ex, "{0}", ex.Message);
+                _logger.Log.Error(ex, "{0}", ex.Message);
                 throw;
             }
             catch (ArgumentException ex)
             {
-                Log.Error(ex, "{0}", ex.Message);
+                _logger.Log.Error(ex, "{0}", ex.Message);
                 throw;
             }
             catch (UnauthorizedAccessException ex)
             {
-                Log.Error(ex, "{0}", ex.Message);
+                _logger.Log.Error(ex, "{0}", ex.Message);
                 throw;
             }
             catch (NotSupportedException ex)
             {
-                Log.Error(ex, "{0}", ex.Message);
+                _logger.Log.Error(ex, "{0}", ex.Message);
                 throw;
             }
             catch (ObjectDisposedException ex)
             {
-                Log.Error(ex, "{0}", ex.Message);
+                _logger.Log.Error(ex, "{0}", ex.Message);
                 throw;
             }
         }
