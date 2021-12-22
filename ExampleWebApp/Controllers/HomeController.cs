@@ -2,7 +2,7 @@
 
 namespace ExampleWebApp.Controllers
 {
-    public class HomeController
+    public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
 
