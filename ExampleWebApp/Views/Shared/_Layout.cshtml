@@ -6,15 +6,19 @@
     <title>@ViewBag.Title</title>
     
     <partial name="Partial/_Styles"/>
+    
+    @await RenderSectionAsync("Styles", required: false)
 </head>
 <body>
 
     <partial name="Partial/_Header"/>
-    
-<main class="container">
-    @RenderBody()
-</main>
 
-<partial name="Partial/_Scripts"/>
+    <main class="container">
+        @RenderBody()
+    </main>
+
+    <partial name="Partial/_Scripts"/>
+
+    @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
