@@ -2,7 +2,7 @@
 
 namespace ExampleWebApp.Data
 {
-    public static class TestData
+    public class TestData
     {
         public static ICollection<Department> Departments { get; } = Enumerable.Range(1, 20)
             .Select(i => new Department
