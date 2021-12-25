@@ -1,0 +1,42 @@
+﻿@model ExampleWebApp.ViewModels.EmployeeViewModel
+
+@{
+    ViewData["Title"] = "Подробнее о сотруднике";
+}
+
+<h1>Подробнее</h1>
+
+<div>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Address)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Address)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.LastName)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.LastName)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Salary)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Salary)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="EditEmployee" asp-route-id="@Model.Id">Редактировать</a> |
+    <a asp-action="DeleteEmployee" asp-route-id="@Model.Id" class="text-danger">Удалить</a> |
+    <a asp-action="Employees">Сотрудники</a>
+</div>
