@@ -1,0 +1,32 @@
+﻿@model IEnumerable<ExampleWebApp.Models.Department>
+
+@{
+    ViewBag.Title = "Отделы в компании";
+}
+
+@if (Model?.Any() is true)
+{
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Название отдела</th>
+            <th>Телефонный номер отдела</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var department in Model)
+        {
+            <tr>
+                <td>@department.Id</td>
+                <td>@department.Name</td>
+                <td>@department.PhoneNumber</td>
+            </tr>
+        }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>Ни одного отдела не было сформировано</p>
+}

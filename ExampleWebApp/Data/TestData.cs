@@ -2,12 +2,13 @@
 
 namespace ExampleWebApp.Data
 {
-    public class TestData
+    public static class TestData
     {
-        public ICollection<Department> Departments { get; } = Enumerable.Range(1, 20)
+        public static ICollection<Department> Departments { get; } = Enumerable.Range(1, 20)
             .Select(i => new Department
             {
                 Id = i,
+                Name = $"Отдел-{i}",
                 Employees = new List<Employee>
                 {
                     new()
