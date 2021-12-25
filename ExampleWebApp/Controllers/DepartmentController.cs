@@ -45,6 +45,9 @@ namespace ExampleWebApp.Controllers
         [HttpPost]
         public IActionResult EditEmployee(EmployeeViewModel model)
         {
+            if (!ModelState.IsValid)
+                return View(model);
+
             var employee = _employees.FirstOrDefault(e => e.Id == model.Id);
             if (employee is null)
                 return NotFound();

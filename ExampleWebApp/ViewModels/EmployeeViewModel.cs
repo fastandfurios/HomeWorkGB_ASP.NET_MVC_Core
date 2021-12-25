@@ -12,11 +12,11 @@ namespace ExampleWebApp.ViewModels
         public int Id { get; set; }
 
         [Display(Name = "Фамилия")]
-        [StringLength(255, MinimumLength = 2)]
+        [StringLength(255, MinimumLength = 2, ErrorMessage = "Длина фамилии должна быть от 2 до 255 символов")]
         public string LastName { get; set; }
 
         [Display(Name = "Имя")]
-        [StringLength(255, MinimumLength = 2)]
+        [StringLength(255, MinimumLength = 2, ErrorMessage = "Длина имени должна быть от 2 до 255 символов")]
         public string Name { get; set; }
 
         [Display(Name = "Премия")]
