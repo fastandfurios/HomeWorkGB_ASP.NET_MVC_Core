@@ -1,4 +1,4 @@
-﻿@model IEnumerable<ExampleWebApp.Models.Department>
+﻿@model IEnumerable<Department>
 
 @{
     ViewBag.Title = "Отделы в компании";
@@ -19,7 +19,9 @@
         {
             <tr>
                 <td>@department.Id</td>
-                <td>@department.Name</td>
+                <td>
+                    <a asp-action="Department" asp-route-id="@department.Id">@department.Name</a>
+                </td>
                 <td>@department.PhoneNumber</td>
             </tr>
         }

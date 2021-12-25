@@ -9,17 +9,16 @@ namespace ExampleWebApp.Data
             {
                 Id = i,
                 Name = $"Отдел-{i}",
-                Employees = new List<Employee>
-                {
-                    new()
+                Employees = Enumerable.Range(1, 5)
+                    .Select(j => new Employee
                     {
-                        Id = i,
-                        Address = $"Адрес-{i}",
-                        LastName = $"Фамилия-{i}",
-                        Name = $"Имя-{i}",
-                        Salary = i,
-                    }
-                },
+                        Id = j,
+                        Address = $"Адрес-{j}",
+                        LastName = $"Фамилия-{j}",
+                        Name = $"Имя-{j}",
+                        Salary = j * 10000,
+                    })
+                    .ToList(),
                 PhoneNumber = $"Телефон-{i}"
             })
             .ToList();
