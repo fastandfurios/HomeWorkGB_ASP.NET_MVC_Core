@@ -4,26 +4,26 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ExampleWebApp.Controllers
 {
-    public class CompanyController : Controller
+    public class DepartmentController : Controller
     {
         private readonly ICollection<Department> _departments;
         private ICollection<Employee> _employees;
-        private readonly ILogger<CompanyController> _logger;
+        private readonly ILogger<DepartmentController> _logger;
         
 
-        public CompanyController(ILogger<CompanyController> logger)
+        public DepartmentController(ILogger<DepartmentController> logger)
         {
             _departments = TestData.Departments;
-            TestData.Departments.ToList().ForEach(d => { _employees = d.Employees; });
             _logger = logger;
+            TestData.Departments.ToList().ForEach(d => { _employees = d.Employees; });
         }
 
-        public IActionResult Index()
+        public IActionResult Departments()
         {
             return View(_departments);
         }
 
-        public IActionResult Department()
+        public IActionResult Employees()
         {
             return View(_employees);
         }
