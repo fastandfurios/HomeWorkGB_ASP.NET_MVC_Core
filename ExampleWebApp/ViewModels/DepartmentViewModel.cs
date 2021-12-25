@@ -1,6 +1,6 @@
 ﻿namespace ExampleWebApp.ViewModels
 {
-    public class DepartmentsViewModel
+    public class DepartmentViewModel
     {
 
     }
