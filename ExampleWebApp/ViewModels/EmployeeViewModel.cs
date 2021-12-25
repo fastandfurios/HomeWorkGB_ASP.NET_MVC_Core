@@ -20,6 +20,7 @@ namespace ExampleWebApp.ViewModels
         public string Name { get; set; }
 
         [Display(Name = "Премия")]
+        [Range(0, Double.PositiveInfinity)]
         public decimal Salary { get; set; }
     }
 }
