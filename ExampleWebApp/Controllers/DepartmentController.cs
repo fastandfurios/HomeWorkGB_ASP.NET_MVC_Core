@@ -8,7 +8,7 @@ namespace ExampleWebApp.Controllers
     public class DepartmentController : Controller
     {
         private readonly ICollection<Department> _departments;
-        private ICollection<Employee> _employees = new List<Employee>();
+        private ICollection<Employee> _employees;
         private readonly ILogger<DepartmentController> _logger;
         
         public DepartmentController(ILogger<DepartmentController> logger)
