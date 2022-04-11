@@ -5,8 +5,62 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Lesson1"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Fibonacсi" Height="500" Width="800" Background="LightSlateGray">
     <Grid>
-
+        <Grid.Resources>
+            <ResourceDictionary>
+                <Style TargetType="Button">
+                    <Setter Property="Height" Value="80"/>
+                    <Setter Property="Width" Value="150"/>
+                    <Setter Property="FontSize" Value="35"/>
+                    <Setter Property="HorizontalAlignment" Value="Left"/>
+                    <Setter Property="BorderBrush" Value="Azure"/>
+                    <Setter Property="BorderThickness" Value="5"/>
+                    <Setter Property="FontFamily" Value="Curlz MT"/>
+                    <Setter Property="VerticalAlignment" Value="Top"/>
+                </Style>
+            </ResourceDictionary>
+        </Grid.Resources>
+        <TextBox Name="Numbers" 
+                 HorizontalAlignment="Center" 
+                 Margin="0,10,0,0"
+                 TextWrapping="Wrap" 
+                 VerticalAlignment="Top"
+                 FontSize="20"
+                 Background="LightSlateGray"
+                 BorderThickness="2"
+                 Height="253"
+                 VerticalScrollBarVisibility="Auto"
+                 BorderBrush="WhiteSmoke" Width="780"/>
+        <Button Content="Start" Margin="45,334,0,0" Click="Button_Click_Start" Background="DarkGreen"/>
+        <Slider Name="Slider"
+                HorizontalAlignment="Left"
+                Margin="493,376,0,0"
+                VerticalAlignment="Top"
+                Width="200"
+                TickPlacement="BottomRight"
+                TickFrequency="0.5"
+                ValueChanged="Slider_ValueChanged"/>
+        <TextBlock Name="Interval"
+                 HorizontalAlignment="Left"
+                 Margin="543,343,0,0"
+                 Text="0 с"
+                 TextWrapping="Wrap"
+                 VerticalAlignment="Top"
+                 Width="100"
+                 Height="25"
+                 RenderTransformOrigin="0.5,0.5"
+                 FontSize="15"
+                 TextAlignment="Center"/>
+        <Button Content="Stop" Margin="250,334,0,0" Background="DarkRed" Click="Button_Click_Stop"/>
+        <TextBlock HorizontalAlignment="Left"
+                   Margin="10,268,0,0"
+                   TextWrapping="Wrap"
+                   VerticalAlignment="Top"
+                   Width="486">
+            Нажмите на кнопку "Start", чтобы запустить последовательность чисел Фибоначчи
+            Нажмите на кнопку "Stop", чтобы остановить последовательность чисел Фибоначчи
+            Двигайте ползунок для изменения появления числа Фибоначчи в последовательности
+        </TextBlock>
     </Grid>
 </Window>
