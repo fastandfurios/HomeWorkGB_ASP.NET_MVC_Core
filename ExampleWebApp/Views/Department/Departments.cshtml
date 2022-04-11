@@ -1,0 +1,34 @@
+﻿@model IEnumerable<Department>
+
+@{
+    ViewBag.Title = "Отделы в компании";
+}
+
+@if (Model?.Any() is true)
+{
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Название отдела</th>
+            <th>Телефонный номер отдела</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var department in Model)
+        {
+            <tr>
+                <td>@department.Id</td>
+                <td>
+                    <a asp-action="Employees" asp-route-id="@department.Id">@department.Name</a>
+                </td>
+                <td>@department.PhoneNumber</td>
+            </tr>
+        }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>Ни одного отдела не было сформировано</p>
+}
